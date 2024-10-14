@@ -1,65 +1,107 @@
-//wirte a funtion that takes in a string and convert the first letter of everyword to uppercase
-//hello world =>Hello world 
-const firstLetterToCaps = (str) => {
-    const result = str.split(" ").map((word) => {
-        return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
-    });
-    return result.join(" ");
-};
-console.log(firstLetterToCaps("testing is fun and stressful"));
-//write a function that checks if the parameter is a number or not
-//return true or false
-const checkNumber = (arg) => typeof arg === "number";
-console.log(checkNumber("hllo"));
+// //DOM-document object model
+// //the method is called get elements on your page with an ID
+// //how to select elements on the page
+// //class, id, tag, combination
+// //get element by the ID
+// //another way to select element is by class names 
+// const text = document.getElementById("text");
+// console.log(text);
+// //get element by classname
+// const message = document.getElementsByClassName("message");
+// console.log(message);
+// //querySelector, querySelectorAll- use css selectors . #, div . class
+// const paragraph = document.querySelector("#text");
+// console.log(paragraph);
+// const paragraphs = document.querySelectorAll(".message");
+// console.log(paragraphs);
+// //nodelist- array methods can be performed
+// //paragraphs.map(paragraph) => {
+// //console.log(paragraph);
+// //});
+// const heading6 = document.querySelector("div h6");
+// //textContent, innerText, innerHTML
+// const heading = document.querySelector("h1");
+// //console.log(heading.textContent);
+// //heading.textContent += "JS IS FUN";
+// console.log(heading.interText);
+// heading.innerText += "js is good";
 
-const currencyData = [
-  { from: "GBP", to: "NGN", rate: 2200 },
-  { from: "USD", to: "NGN", rate: 1700 },
-  { from: "EuR", to: "NGN", rate: 1900 },
-  { from: "YEN", to: "NGN", rate: 400 },
-];
-//iterate over the currencydata and log a message
-currencyData.map((currencyRate) => {
-    console.log(
-      `The Exchange Rate for ${currencyRate.from} to ${currencyRate.to} is ${currencyRate.rate}`
-    );
-});
-//wriet a function that returns the exchange rate for that cureency pair
-//or an appropriate message if the pair is not found 
-const findCurrencyPair = (baseCurrency, toCurrency) => {
-    //search through the currencyData to find a match
-    const pair = currencyData.find((currency) => {
-        return currency.from === baseCurrency && currency.to === toCurrency;
-    });
-    if (pair) {
-        console.log(
-            `The Exchange Rate for ${pair.from} to ${pair.to} is ${pair.rate}`
-        );
-    } else {
-        console.log("The currency pair cannot be found");
-    }
-};
-findCurrencyPair("YEN", "NGN");
+// const div = document.querySelector("div");
+// console.log(div.innerHTML);
+// div.innerHTML += "<p>okay</p>";
+// const name = "john";
+// div.innerHTML = `<h1>Welcome ${name}</h1>`;
+// //inetract with css class names means you have styled your css then you just want to call on them in your java script
+// const beginPara = document.querySelector(".begin");
+// console.log(beginPara);
+// beginPara.className = "okay";
+// beginPara.id = "good";
+// beginPara.style.color = "red";
+// beginPara.style.backgroundColor = "green";
+// //interact with css class names 
+// const h1 = document.querySelector("h1");
+// h1.className = "success";
+// //classList - add or remove
+// const msg = document.querySelector("h2.message");
+// //console.log(msg.classlist);
+// msg.classList.add("error");
+// msg.classList.remove("example");
+// console.log(msg.classList.contains("good"));
 
-//write a conversion function
-//2usd
-const convertCurrency = (baseCurrency, toCurrency, amount) => {
-    const pair = currencyData.find((currency) => {
-        return currency.from === baseCurrency && currency.to === toCurrency;
-    });
+// console.log(msg);
+// //classlist method-add or remove -conatins-ask if it contaims an element or classname (to check if an element has it or not)and returns true or false
+// //how to create element in js using the create element method
+// const section = document.createElement("section");
+// section.innerHTML = "<h1>Created from JS</h1>";
+// //append it
+// const body = document.querySelector("body");
+// body.appendChild(section);
+// //remove element remove child
+// //body.removeChild(section)
 
-    if (pair) {
-        //conversion
-        console.log(`${amount} ${pair.from} is equaivalent to ${amount * pair.rate} ${pair.to}`);
-    } else {
-        console.log("currency pair not found");
-    }
-};
+// //replace child 
+// const link = document.createElement("a");
 
-convertCurrency("GBP", "NGN", 500);
-//write a function to add to the currency data list
-const AddNewCurrency = (from, to, rate) => {
-    currencyData.push({from, to, rate });
-    console.log(currencyData);
-};
-AddNewCurrency("AUS","NGN", 1040);
+// link.innerText = "Visit Google";
+// //link.href = "https://google.com";
+// link.setAttribute("href", "https://google.com");
+
+// body.replaceChild(link, section);
+// //responding to users interactions
+// //two things involved when responding to interactions
+// //event click-what happens when a user clicks the button
+// //event handler
+// //add event listener-first listen for the event and then handle
+// const btn = document.querySelector("button");
+
+// btn.addEventListener("click", () => {
+//     console.log("btn clicked");
+//     body.style.backgroundColor = "aqua";
+// });
+const form = document.querySelector("form");
+//sobmit
+form.addEventListener("submit", (event) => {
+    //default of forms when submitted is to refresh the page
+    event.preventDefault();
+    //select those inputfields
+    const username = document.querySelector(".username");
+    const password = document.querySelector(".password");
+
+    const usernameValue = username.value.trim();
+    const passwordValue = password.value;
+    const small = document.querySelector("small");
+   // console.log(usernameValue, passwordValue);
+   //validate the password mjust not include password
+   if(!usernameValue || !passwordValue) {
+    //display error message
+    small.textContent = "Please fill all fields";
+   } else if (usernameValue.length < 5) {
+     small.textContent = "Minimum username length is 5";
+   } else if (passwordValue.toLowerCase().includes("password")) {
+    small.innerText = "password must not include password";
+   } else {
+    //submit form
+    small.textContent = "Form submitted";
+   }
+})
+
